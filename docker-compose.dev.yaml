@@ -1,0 +1,97 @@
+services:
+  client:
+    container_name: client
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./apps/client:/usr/src/apps/client
+      - pnpm_node_modules_cache:/usr/src/node_modules
+      - ./packages/shared:/usr/src/packages/shared
+    command: pnpm --filter ./apps/client dev
+
+    ports:
+      - 3000:3000
+    networks:
+      - auth_net
+    depends_on:
+      server:
+        condition: service_healthy
+  server:
+    container_name: server
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./apps/server:/usr/src/apps/server
+      - pnpm_node_modules_cache:/usr/src/node_modules
+      - ./packages/shared:/usr/src/packages/shared
+    ports:
+      - 5000:5000
+    env_file:
+      - ./apps/server/.env.dev
+    networks:
+      - auth_net
+    command: pnpm --filter ./apps/server dev
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'wget',
+          '--quiet',
+          '--tries=1',
+          '--spider',
+          'http://localhost:5000/health',
+        ]
+      interval: 5s
+      timeout: 15s
+      retries: 5
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrator:
+        condition: service_completed_successfully
+
+  migrator:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    restart: 'no'
+    volumes:
+      - ./apps/server:/apps/server
+    env_file:
+      - ./apps/server/.env.dev
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - auth_net
+    command: sh -c "pnpm --filter ./apps/server drizzle:push"
+
+  postgres:
+    image: postgres:18.1-alpine
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=manson
+      - POSTGRES_DB=auth_db
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    ports:
+      - 5432:5432
+    networks:
+      - auth_net
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
+      interval: 5s
+      timeout: 15s
+      retries: 5
+
+volumes:
+  pnpm_node_modules_cache:
+  postgres_data:
+
+networks:
+  auth_net:

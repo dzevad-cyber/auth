@@ -1,0 +1,30 @@
+FROM node:24.11.1-alpine AS base
+
+RUN npm install -g pnpm
+
+WORKDIR /usr/src
+
+# root files
+COPY package.json pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml .
+COPY tsconfig.json .
+
+# apps files
+COPY apps/client/package.json ./apps/client/
+COPY apps/server/package.json ./apps/server/
+COPY apps/client/tsconfig.json ./apps/client/
+COPY apps/server/tsconfig.json ./apps/server/
+
+# shared 
+COPY packages/shared/package.json ./packages/shared/
+COPY packages/shared/tsconfig.json ./packages/shared/
+
+RUN pnpm install
+
+COPY . .
+
+CMD [ "pnpm", "run", "dev" ]
+
+
+
+

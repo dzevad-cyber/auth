@@ -1,0 +1,31 @@
+{
+  "name": "@auth/server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"node --env-file=.env.dev --watch ./src/server.ts\" \"pnpm --filter @auth/shared dev\"",
+    "drizzle:push": "pnpm drizzle-kit push --config=./drizzle.config.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.22.0",
+  "dependencies": {
+    "@auth/shared": "workspace:1.0.0",
+    "cors": "^2.8.5",
+    "drizzle-orm": "^0.45.0",
+    "express": "^5.2.1",
+    "pg": "^8.16.3",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.19.1",
+    "@types/pg": "^8.15.6",
+    "drizzle-kit": "^0.31.8",
+    "prettier": "^3.7.4"
+  }
+}
