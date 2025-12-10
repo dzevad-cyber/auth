@@ -28,8 +28,8 @@ export const globalErrorHandler = (
   } else {
     return res.status(statusCode).json({
       status,
-      errors: err.error?.error
-        ? z.flattenError(err.error.error).fieldErrors
+      errors: err.errors?.error
+        ? z.flattenError(err.errors.error).fieldErrors
         : undefined,
     });
   }
