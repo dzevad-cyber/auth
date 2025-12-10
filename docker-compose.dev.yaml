@@ -17,6 +17,12 @@ services:
     depends_on:
       server:
         condition: service_healthy
+    logging:
+      driver: local
+      options:
+        max-size: '5mb'
+        max-file: '3'
+
   server:
     container_name: server
     build:
@@ -54,6 +60,11 @@ services:
         condition: service_healthy
       migrator:
         condition: service_completed_successfully
+    logging:
+      driver: local
+      options:
+        max-size: '5mb'
+        max-file: '3'
 
   migrator:
     container_name: migrator
@@ -65,13 +76,17 @@ services:
       - ./apps/server:/apps/server
     env_file:
       - ./apps/server/.env.dev
-
     depends_on:
       postgres:
         condition: service_healthy
     networks:
       - auth_net
     command: sh -c "pnpm --filter ./apps/server drizzle:push"
+    logging:
+      driver: local
+      options:
+        max-size: '5mb'
+        max-file: '3'
 
   postgres:
     image: postgres:18.1-alpine
@@ -88,10 +103,15 @@ services:
     networks:
       - auth_net
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
+      test: ['CMD', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
       interval: 5s
       timeout: 15s
       retries: 5
+    logging:
+      driver: local
+      options:
+        max-size: '5mb'
+        max-file: '3'
 
 volumes:
   pnpm_node_modules_cache:
