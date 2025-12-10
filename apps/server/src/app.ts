@@ -1,17 +1,15 @@
 import express, { type Application } from 'express';
+import morgan from 'morgan';
 import cors from 'cors';
 import * as z from 'zod';
-import { AppError } from './services/errors/appError.ts';
 import { globalErrorHandler } from './globals/middlewares/error.handler.middleware.ts';
-import { db } from './db/db.ts';
-import { usersTable } from './db/schema/user.ts';
-import { eq } from 'drizzle-orm';
 import v1Router from './api/v1.ts';
 
 const app: Application = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(morgan('dev'));
 
 app.use('/api/v1', v1Router);
 
