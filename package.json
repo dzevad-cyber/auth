@@ -12,6 +12,7 @@
   "packageManager": "pnpm@10.22.0",
   "dependencies": {
     "concurrently": "^9.2.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "zod": "^4.1.13"
   }
 }
