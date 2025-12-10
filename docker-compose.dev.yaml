@@ -52,9 +52,10 @@ services:
           '--spider',
           'http://localhost:5000/api/v1/health',
         ]
-      interval: 5s
-      timeout: 15s
+      interval: 10m
+      timeout: 5s
       retries: 5
+      start_period: 3s
     depends_on:
       postgres:
         condition: service_healthy
@@ -107,6 +108,7 @@ services:
       interval: 5s
       timeout: 15s
       retries: 5
+      start_period: 3s
     logging:
       driver: local
       options:
