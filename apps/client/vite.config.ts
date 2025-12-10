@@ -29,9 +29,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      // '@auth/shared': fileURLToPath(
-      //   new URL('../../packages/shared', import.meta.url),
-      // ),
     },
   },
 });
