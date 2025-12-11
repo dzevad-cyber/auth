@@ -52,7 +52,7 @@ services:
           '--spider',
           'http://localhost:5000/api/v1/health',
         ]
-      interval: 10m
+      interval: 1h
       timeout: 5s
       retries: 5
       start_period: 3s
