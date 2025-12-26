@@ -18,7 +18,7 @@ export class AppError extends Error {
   }
 }
 
-type ErrorTypes = 'INVALIDATION_ERROR' | 'UNKNOWN';
+type ErrorTypes = 'VALIDATION_ERROR' | 'UNKNOWN';
 type Errors =
   | {
       type: ErrorTypes;

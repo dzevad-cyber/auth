@@ -7,10 +7,7 @@ export const getAllUsers = async (_req: Request, res: Response) => {
   const users = await db.select().from(usersTable);
 
   return res.status(200).json({
-    status: 'success',
-    data: {
-      users,
-    },
+    users,
   });
 };
 
@@ -20,10 +17,7 @@ export const getOneUser = async (req: Request, res: Response) => {
     .from(usersTable)
     .where(eq(usersTable.id, parseInt(req.params['id']!)));
 
-
-    
   return res.status(200).json({
-    status: 'success',
-    data: { user },
+    user,
   });
 };

@@ -1,5 +1,5 @@
 import type { NextFunction, Response, Request } from 'express';
-import { AppError } from '../../services/errors/appError.ts';
+import { AppError } from '../../lib/errors/appError.ts';
 import * as z from 'zod';
 import { logger } from '../../services/pino.logger.ts';
 
@@ -27,6 +27,11 @@ export const globalErrorHandler = (
       message: 'Ups. Something went wrong ...',
     });
   } else {
+    console.log(
+      '[ error.handler.middleware.ts - 30 ] - statusCode:',
+      statusCode,
+    );
+
     return res.status(statusCode).json({
       status,
       errors: err.errors?.error

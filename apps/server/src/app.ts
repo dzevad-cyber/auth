@@ -2,7 +2,7 @@ import express, { type Application } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { globalErrorHandler } from './globals/middlewares/error.handler.middleware.ts';
-import v1Router from './api/v1.ts';
+import { v1Router } from './api/v1.ts';
 
 const app: Application = express();
 
