@@ -7,8 +7,8 @@ export const usersTable = p.pgTable('users', {
   email: p.varchar().unique(),
   password: p.varchar('password', { length: 50 }).notNull(),
   passwordConfirm: p.varchar('password_confirm', { length: 50 }).notNull(),
-  createdAt: p.timestamp().defaultNow().notNull(),
+  createdAt: p.timestamp('created_at').defaultNow().notNull(),
   updatedAt: p
-    .timestamp('updated_at', { mode: 'date', precision: 3 })
+    .timestamp('updated_At', { mode: 'date', precision: 3 })
     .$onUpdate(() => new Date()),
 });
