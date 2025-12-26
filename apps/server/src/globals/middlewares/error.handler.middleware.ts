@@ -1,6 +1,7 @@
 import type { NextFunction, Response, Request } from 'express';
 import { AppError } from '../../services/errors/appError.ts';
 import * as z from 'zod';
+import { logger } from '../../services/pino.logger.ts';
 
 export const globalErrorHandler = (
   err: AppError,
@@ -17,7 +18,7 @@ export const globalErrorHandler = (
       'sending error to analytics',
     );
   } else if (process.env.NODE_ENV === 'development') {
-    console.log('[ error.handler.middleware.ts - 26 ] - ERROR:', err);
+    logger.error(err, '[ error.handler.middleware.ts - 26 ] - ERROR:');
   }
 
   if (!err.isOperational) {

@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite --port 3000\" \"pnpm --filter @auth/shared dev\"",
+    "dev": "concurrently --raw \"vite --port 3000\" \"pnpm --filter @auth/shared dev\"",
     "build": "vite build && tsc",
     "preview": "vite preview",
     "test": "vitest run",

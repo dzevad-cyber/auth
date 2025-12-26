@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"node --env-file=.env.dev --watch ./src/server.ts\" \"pnpm --filter @auth/shared dev\"",
+    "dev": "concurrently --raw \"node --env-file=.env.dev --watch ./src/server.ts\" \"pnpm --filter @auth/shared dev\"",
     "drizzle:push": "pnpm drizzle-kit push --config=./drizzle.config.ts"
   },
   "keywords": [],

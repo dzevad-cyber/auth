@@ -1,7 +1,6 @@
 import express, { type Application } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import * as z from 'zod';
 import { globalErrorHandler } from './globals/middlewares/error.handler.middleware.ts';
 import v1Router from './api/v1.ts';
 
@@ -21,16 +20,3 @@ app.use(globalErrorHandler);
 
 export const PORT = process.env['PORT'] ?? 5000;
 export default app;
-
-const ReqBodySchema = z
-  .object({
-    first_name: z.string(),
-    last_name: z.string(),
-    password: z.string(),
-    password_confirm: z.string(),
-  })
-  .partial();
-
-const ReqParamsSchema = z.object({
-  id: z.string(),
-});

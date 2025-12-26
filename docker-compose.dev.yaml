@@ -79,7 +79,7 @@ services:
       - ./apps/server/.env.dev
     depends_on:
       postgres:
-        condition: service_healthy
+        condition: service_started
     networks:
       - auth_net
     command: sh -c "pnpm --filter ./apps/server drizzle:push"
