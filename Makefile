@@ -19,7 +19,11 @@ clean: ## clean all
 	docker system prune;
 	docker builder prune;
 	docker volume prune;
+	docker image rmi $(docker images -q)
 # 	docker image rmi $(docker images -aq);
 
 .PHONY: up build
-up-build: build up ## builds imgage without cache and runs containers
+build-up: build up ## builds imgage without cache and runs containers
+
+.PHONY: down-up
+down-up: down up ## builds imgage without cache and runs containers
