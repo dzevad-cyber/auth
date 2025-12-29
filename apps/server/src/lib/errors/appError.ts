@@ -4,24 +4,31 @@ export class AppError extends Error {
   statusCode: number;
   status: string;
   isOperational: boolean;
-  errors: Errors;
+  error: Errors;
 
-  constructor(message: string, statusCode: number, error: Errors) {
+  constructor(
+    message: string,
+    statusCode: number,
+    error: Errors = defaultErrType,
+  ) {
     super(message);
 
     this.statusCode = statusCode;
     this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
     this.isOperational = true;
-    this.errors = error;
+    this.error = error;
 
     Error.captureStackTrace(this, this.constructor);
   }
 }
 
-type ErrorTypes = 'VALIDATION_ERROR' | 'UNKNOWN';
 type Errors =
   | {
-      type: ErrorTypes;
+      type: 'VALIDATION_ERROR';
       error: ZodError;
     }
-  | undefined;
+  | typeof defaultErrType;
+
+const defaultErrType = {
+  type: 'APP_ERROR',
+} as const;

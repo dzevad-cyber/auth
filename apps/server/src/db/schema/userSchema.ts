@@ -5,8 +5,7 @@ export const usersTable = p.pgTable('users', {
   firstName: p.varchar('first_name', { length: 30 }).notNull(),
   lastName: p.varchar('last_name', { length: 30 }).notNull(),
   email: p.varchar().unique(),
-  password: p.varchar('password', { length: 50 }).notNull(),
-  passwordConfirm: p.varchar('password_confirm', { length: 50 }).notNull(),
+  password: p.varchar().notNull(),
   createdAt: p.timestamp('created_at').defaultNow().notNull(),
   updatedAt: p
     .timestamp('updated_At', { mode: 'date', precision: 3 })

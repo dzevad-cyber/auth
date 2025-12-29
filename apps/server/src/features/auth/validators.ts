@@ -12,3 +12,8 @@ export const registerValidatorReqBody = z
     message: "Passwords don't match",
     path: ['passwordConfirm'],
   });
+
+export const loginValidatorReqBody = z.object({
+  email: z.email(),
+  password: z.string(),
+});
