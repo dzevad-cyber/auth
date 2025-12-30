@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm';
 import type { RequestHandler } from 'express';
 import { AppError } from '../../../lib/errors/appError.ts';
 import { db } from '../../../db/db.ts';
-import { UserTable } from '../../../db/schema/userSchema.ts';
+import { userTable } from '../../../db/schema/userSchema.ts';
 
 export const getOneUser: RequestHandler = async (req, res) => {
   const id = req.params['id'];
@@ -15,12 +15,12 @@ export const getOneUser: RequestHandler = async (req, res) => {
 
   const [user] = await db
     .select({
-      firstName: UserTable.firstName,
-      lastName: UserTable.lastName,
-      email: UserTable.email,
+      firstName: userTable.firstName,
+      lastName: userTable.lastName,
+      email: userTable.email,
     })
-    .from(UserTable)
-    .where(eq(UserTable.id, parseInt(id)));
+    .from(userTable)
+    .where(eq(userTable.id, parseInt(id)));
 
   return res.status(200).json({
     user,
