@@ -3,7 +3,7 @@ import jwt, { type JwtPayload } from 'jsonwebtoken';
 import { eq } from 'drizzle-orm';
 import { AppError } from '../../../lib/errors/appError.ts';
 import { db } from '../../../db/db.ts';
-import { UserTable } from '../../../db/schema/userSchema.ts';
+import { userTable } from '../../../db/schema/userSchema.ts';
 
 export const getRefreshToken: RequestHandler = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
@@ -18,8 +18,8 @@ export const getRefreshToken: RequestHandler = async (req, res) => {
 
   const [user] = await db
     .select()
-    .from(UserTable)
-    .where(eq(UserTable.id, parseInt(jwtPayload.id)));
+    .from(userTable)
+    .where(eq(userTable.id, parseInt(jwtPayload.id)));
 
   if (!user || user.refreshToken !== refreshToken) {
     throw new AppError('Please register or login.', 403);
