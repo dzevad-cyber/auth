@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-import { usersTable } from '../../../db/schema/userSchema.ts';
+import { UserTable, type User } from '../../../db/schema/userSchema.ts';
 import bcrypt from 'bcryptjs';
 import { AppError } from '../../../lib/errors/appError.ts';
 import jwt from 'jsonwebtoken';
@@ -9,8 +9,8 @@ import { eq } from 'drizzle-orm';
 export const login: RequestHandler = async (req, res) => {
   const [registeredUser] = await db
     .select()
-    .from(usersTable)
-    .where(eq(usersTable.email, req.body.email));
+    .from(UserTable)
+    .where(eq(UserTable.email, req.body.email));
 
   if (!registeredUser) throw new AppError('User not found.', 404);
 
@@ -21,29 +21,18 @@ export const login: RequestHandler = async (req, res) => {
 
   if (!passwordMatch) throw new AppError('Invalid password', 400);
 
-  const accessToken = jwt.sign(
-    {
-      id: registeredUser.id,
-    },
-    process.env.JWT_ACCESS_TOKEN,
-    {
-      expiresIn: '1h',
-    },
-  );
+  const { accessToken, refreshToken } = getTokens(registeredUser);
 
-  const refreshToken = jwt.sign(
-    {
-      id: registeredUser.id,
-    },
-    process.env.JWT_REFRESH_TOKEN,
-    {
-      expiresIn: '1w',
-    },
-  );
+  await db
+    .update(UserTable)
+    .set({
+      refreshToken,
+    })
+    .returning();
 
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 15 * 60 * 1000,
     sameSite: 'lax',
     secure: true,
   });
@@ -58,4 +47,28 @@ export const login: RequestHandler = async (req, res) => {
   return res.status(200).json({
     message: 'You successfully logged in.',
   });
+};
+
+const getTokens = (user: User) => {
+  const accessToken = jwt.sign(
+    {
+      id: user.id,
+    },
+    process.env.JWT_ACCESS_TOKEN,
+    {
+      expiresIn: '15m',
+    },
+  );
+
+  const refreshToken = jwt.sign(
+    {
+      id: user.id,
+    },
+    process.env.JWT_REFRESH_TOKEN,
+    {
+      expiresIn: '1w',
+    },
+  );
+
+  return { accessToken, refreshToken };
 };

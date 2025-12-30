@@ -1,15 +1,15 @@
 import type { RequestHandler } from 'express';
 import { db } from '../../../db/db.ts';
-import { usersTable } from '../../../db/schema/userSchema.ts';
+import { UserTable } from '../../../db/schema/userSchema.ts';
 
 export const getAllUsers: RequestHandler = async (req, res) => {
   const users = await db
     .select({
-      firstName: usersTable.firstName,
-      lastName: usersTable.lastName,
-      email: usersTable.email,
+      firstName: UserTable.firstName,
+      lastName: UserTable.lastName,
+      email: UserTable.email,
     })
-    .from(usersTable);
+    .from(UserTable);
 
   return res.status(200).json({
     users,

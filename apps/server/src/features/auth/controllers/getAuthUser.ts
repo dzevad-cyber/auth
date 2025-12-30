@@ -1,19 +1,19 @@
 import { type RequestHandler } from 'express';
 import { eq } from 'drizzle-orm';
 import { db } from '../../../db/db.ts';
-import { usersTable } from '../../../db/schema/userSchema.ts';
 import { AppError } from '../../../lib/errors/appError.ts';
+import { UserTable } from '../../../db/schema/userSchema.ts';
 
 export const getAuthenticatedUser: RequestHandler = async (req, res) => {
   const { id } = req.jwtPayload;
 
   const [user] = await db
     .select({
-      firstName: usersTable.firstName,
-      lastName: usersTable.lastName,
+      firstName: UserTable.firstName,
+      lastName: UserTable.lastName,
     })
-    .from(usersTable)
-    .where(eq(usersTable.id, parseInt(id)));
+    .from(UserTable)
+    .where(eq(UserTable.id, parseInt(id)));
 
   if (!user) throw new AppError('Please login or register.', 401);
 
