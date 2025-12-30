@@ -1,9 +1,10 @@
 import { db } from '../../db/db.ts';
-import type { Request, Response } from 'express';
+import type { RequestHandler } from 'express';
 import { usersTable } from '../../db/schema/userSchema.ts';
 import { eq } from 'drizzle-orm';
+import { AppError } from '../../lib/errors/appError.ts';
 
-export const getAllUsers = async (_req: Request, res: Response) => {
+export const getAllUsers: RequestHandler = async (_req, res) => {
   const users = await db.select().from(usersTable);
 
   return res.status(200).json({
@@ -11,7 +12,7 @@ export const getAllUsers = async (_req: Request, res: Response) => {
   });
 };
 
-export const getOneUser = async (req: Request, res: Response) => {
+export const getOneUser: RequestHandler = async (req, res) => {
   const user = await db
     .select()
     .from(usersTable)

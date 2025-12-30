@@ -1,29 +1,10 @@
-import { type RequestHandler } from 'express';
-import { usersTable } from '../../db/schema/userSchema.ts';
-import { db } from '../../db/db.ts';
-import { hash } from '../../services/bcrypt.ts';
-import { eq } from 'drizzle-orm';
-import { AppError } from '../../lib/errors/appError.ts';
+import type { RequestHandler } from 'express';
+import { usersTable } from '../../../db/schema/userSchema.ts';
 import bcrypt from 'bcryptjs';
+import { AppError } from '../../../lib/errors/appError.ts';
 import jwt from 'jsonwebtoken';
-
-export const register: RequestHandler = async (req, res, _next) => {
-  const hashedPassword = await hash(req.body.password);
-
-  const newUser = await db
-    .insert(usersTable)
-    .values({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: hashedPassword,
-    })
-    .returning();
-
-  return res.status(201).json({
-    newUser,
-  });
-};
+import { db } from '../../../db/db.ts';
+import { eq } from 'drizzle-orm';
 
 export const login: RequestHandler = async (req, res) => {
   const [registeredUser] = await db
@@ -46,7 +27,7 @@ export const login: RequestHandler = async (req, res) => {
     },
     process.env.JWT_ACCESS_TOKEN,
     {
-      expiresIn: '30s',
+      expiresIn: '1h',
     },
   );
 

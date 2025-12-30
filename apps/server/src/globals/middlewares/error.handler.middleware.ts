@@ -26,7 +26,7 @@ export const globalErrorHandler = (
 
   if (!appError.isOperational) {
     return res.status(500).json({
-      status: 'appErroror',
+      status: 'error',
       message: 'Ups. Something went wrong ...',
     });
   } else {
