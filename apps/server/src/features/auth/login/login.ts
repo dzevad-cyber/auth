@@ -1,9 +1,9 @@
 import type { RequestHandler } from 'express';
-import { UserTable, type User } from '../../../db/schema/userSchema.ts';
-import bcrypt from 'bcryptjs';
-import { AppError } from '../../../lib/errors/appError.ts';
-import jwt from 'jsonwebtoken';
 import { db } from '../../../db/db.ts';
+import { UserTable } from '../../../db/schema/userSchema.ts';
+import { AppError } from '../../../lib/errors/appError.ts';
+import bcrypt from 'bcryptjs';
+import { getTokens } from './login.helpers.ts';
 import { eq } from 'drizzle-orm';
 
 export const login: RequestHandler = async (req, res) => {
@@ -47,28 +47,4 @@ export const login: RequestHandler = async (req, res) => {
   return res.status(200).json({
     message: 'You successfully logged in.',
   });
-};
-
-const getTokens = (user: User) => {
-  const accessToken = jwt.sign(
-    {
-      id: user.id,
-    },
-    process.env.JWT_ACCESS_TOKEN,
-    {
-      expiresIn: '15m',
-    },
-  );
-
-  const refreshToken = jwt.sign(
-    {
-      id: user.id,
-    },
-    process.env.JWT_REFRESH_TOKEN,
-    {
-      expiresIn: '1w',
-    },
-  );
-
-  return { accessToken, refreshToken };
 };

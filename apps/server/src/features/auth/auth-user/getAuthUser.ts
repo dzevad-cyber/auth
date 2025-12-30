@@ -1,8 +1,8 @@
 import { type RequestHandler } from 'express';
 import { eq } from 'drizzle-orm';
 import { db } from '../../../db/db.ts';
-import { AppError } from '../../../lib/errors/appError.ts';
 import { UserTable } from '../../../db/schema/userSchema.ts';
+import { AppError } from '../../../lib/errors/appError.ts';
 
 export const getAuthenticatedUser: RequestHandler = async (req, res) => {
   const { id } = req.jwtPayload;
