@@ -6,7 +6,7 @@ import { db } from '../../../db/db.ts';
 export const register: RequestHandler = async (req, res, _next) => {
   const hashedPassword = await hash(req.body.password);
 
-  const newUser = await db
+  const [user] = await db
     .insert(usersTable)
     .values({
       firstName: req.body.firstName,
@@ -14,9 +14,13 @@ export const register: RequestHandler = async (req, res, _next) => {
       email: req.body.email,
       password: hashedPassword,
     })
-    .returning();
+    .returning({
+      firstName: usersTable.firstName,
+      lastName: usersTable.lastName,
+      email: usersTable.email,
+    });
 
   return res.status(201).json({
-    newUser,
+    user,
   });
 };
