@@ -1,9 +1,9 @@
 import type { RequestHandler } from 'express';
-import { AppError } from '../../../lib/errors/appError.ts';
 import jwt, { type JwtPayload } from 'jsonwebtoken';
+import { eq } from 'drizzle-orm';
+import { AppError } from '../../../lib/errors/appError.ts';
 import { db } from '../../../db/db.ts';
 import { UserTable } from '../../../db/schema/userSchema.ts';
-import { eq } from 'drizzle-orm';
 
 export const getRefreshToken: RequestHandler = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;
