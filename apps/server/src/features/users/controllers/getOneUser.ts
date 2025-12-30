@@ -2,23 +2,25 @@ import { eq } from 'drizzle-orm';
 import type { RequestHandler } from 'express';
 import { AppError } from '../../../lib/errors/appError.ts';
 import { db } from '../../../db/db.ts';
-import { usersTable } from '../../../db/schema/userSchema.ts';
+import { UserTable } from '../../../db/schema/userSchema.ts';
 
 export const getOneUser: RequestHandler = async (req, res) => {
   const id = req.params['id'];
 
   if (!id) throw new AppError('Invalid request.', 400);
 
-  console.log('[ getOneUser.ts - 12 ] - :', 'hello world');
+  if (typeof id === 'string' && isNaN(parseInt(id))) {
+    throw new AppError('Invalid id in params', 400);
+  }
 
   const [user] = await db
     .select({
-      firstName: usersTable.firstName,
-      lastName: usersTable.lastName,
-      email: usersTable.email,
+      firstName: UserTable.firstName,
+      lastName: UserTable.lastName,
+      email: UserTable.email,
     })
-    .from(usersTable)
-    .where(eq(usersTable.id, parseInt(id)));
+    .from(UserTable)
+    .where(eq(UserTable.id, parseInt(id)));
 
   return res.status(200).json({
     user,

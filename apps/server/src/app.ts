@@ -20,7 +20,9 @@ app.use(morgan('dev'));
 app.use('/api/v1', v1Router);
 
 app.all('/*notFoundRoutes', (req, res) => {
-  res.status(404).send(`Not found ${req.originalUrl}`);
+  res.status(404).json({
+    message: `Not found ${req.originalUrl}`,
+  });
 });
 
 app.use(globalErrorHandler);
