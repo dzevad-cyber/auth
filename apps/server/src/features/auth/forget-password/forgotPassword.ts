@@ -19,10 +19,13 @@ export const forgotPassword: RequestHandler = async (req, res) => {
   const resetToken = crypto.randomBytes(32).toString('hex');
   const resetTokenExpireTime = new Date(Date.now() + 3600000);
 
-  await db.update(userTable).set({
-    resetPasswordToken: resetToken,
-    resetPasswordExpires: resetTokenExpireTime,
-  });
+  await db
+    .update(userTable)
+    .set({
+      resetPasswordToken: resetToken,
+      resetPasswordExpires: resetTokenExpireTime,
+    })
+    .where(eq(userTable.id, user.id));
 
   return res.status(200).json({
     resetToken,
