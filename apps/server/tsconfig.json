@@ -41,11 +41,7 @@
     "moduleDetection": "force",
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "emitDeclarationOnly": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "emitDeclarationOnly": true
   },
   "extends": "../../tsconfig.json",
   "exclude": ["node_modules"],
