@@ -20,7 +20,7 @@ export const globalErrorHandler = (
   } else if (process.env.NODE_ENV === 'development') {
     logger.error(
       appError,
-      '[ appErroror.handler.middleware.ts - 26 ] - appErrorOR:',
+      '[ appErroror.handler.middleware.ts - 26 ] - appError:',
     );
   }
 

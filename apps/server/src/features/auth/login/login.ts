@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
 import { db } from '../../../db/db.ts';
-import { UserTable } from '../../../db/schema/userSchema.ts';
+import { userTable } from '../../../db/schema/userSchema.ts';
 import { AppError } from '../../../lib/errors/appError.ts';
 import bcrypt from 'bcryptjs';
 import { getTokens } from './login.helpers.ts';
@@ -9,8 +9,8 @@ import { eq } from 'drizzle-orm';
 export const login: RequestHandler = async (req, res) => {
   const [registeredUser] = await db
     .select()
-    .from(UserTable)
-    .where(eq(UserTable.email, req.body.email));
+    .from(userTable)
+    .where(eq(userTable.email, req.body.email));
 
   if (!registeredUser) throw new AppError('User not found.', 404);
 
@@ -24,7 +24,7 @@ export const login: RequestHandler = async (req, res) => {
   const { accessToken, refreshToken } = getTokens(registeredUser);
 
   await db
-    .update(UserTable)
+    .update(userTable)
     .set({
       refreshToken,
     })

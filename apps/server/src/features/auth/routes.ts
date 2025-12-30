@@ -8,6 +8,9 @@ import { logout } from './logout/logout.ts';
 import { validateLoginReqBody } from './login/login.middlewares.ts';
 import { validateReqisterReqBody } from './register/register.middlewares.ts';
 import { forgotPassword } from './forget-password/forgotPassword.ts';
+import { validateForgotPasswordReqBody } from './forget-password/forgotPassword.middlewares.ts';
+import { resetPassword } from './reset-password/resetPassword.ts';
+import { validateResetPasswordReqBody } from './reset-password/resetPassword.middleware.ts';
 
 export const authRouter: Router = express.Router();
 
@@ -16,4 +19,14 @@ authRouter.post('/login', [validateLoginReqBody], login);
 authRouter.get('/user', [authenticateToken], getAuthenticatedUser);
 authRouter.post('/refresh', getRefreshToken);
 authRouter.post('/logout', logout);
-authRouter.post('/forgot-password', forgotPassword);
+authRouter.post(
+  '/forgot-password',
+  [validateForgotPasswordReqBody],
+  forgotPassword,
+);
+
+authRouter.post(
+  '/reset-password',
+  [validateResetPasswordReqBody],
+  resetPassword,
+);

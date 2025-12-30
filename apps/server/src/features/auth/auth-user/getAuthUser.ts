@@ -1,7 +1,7 @@
 import { type RequestHandler } from 'express';
 import { eq } from 'drizzle-orm';
 import { db } from '../../../db/db.ts';
-import { UserTable } from '../../../db/schema/userSchema.ts';
+import { userTable } from '../../../db/schema/userSchema.ts';
 import { AppError } from '../../../lib/errors/appError.ts';
 
 export const getAuthenticatedUser: RequestHandler = async (req, res) => {
@@ -9,11 +9,11 @@ export const getAuthenticatedUser: RequestHandler = async (req, res) => {
 
   const [user] = await db
     .select({
-      firstName: UserTable.firstName,
-      lastName: UserTable.lastName,
+      firstName: userTable.firstName,
+      lastName: userTable.lastName,
     })
-    .from(UserTable)
-    .where(eq(UserTable.id, parseInt(id)));
+    .from(userTable)
+    .where(eq(userTable.id, parseInt(id)));
 
   if (!user) throw new AppError('Please login or register.', 401);
 

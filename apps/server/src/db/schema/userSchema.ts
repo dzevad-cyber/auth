@@ -1,7 +1,7 @@
 import type { InferSelectModel } from 'drizzle-orm';
 import * as p from 'drizzle-orm/pg-core';
 
-export const UserTable = p.pgTable('users', {
+export const userTable = p.pgTable('users', {
   id: p.serial('id').primaryKey(),
   firstName: p.varchar('first_name', { length: 30 }).notNull(),
   lastName: p.varchar('last_name', { length: 30 }).notNull(),
@@ -12,6 +12,8 @@ export const UserTable = p.pgTable('users', {
     .timestamp('updated_At', { mode: 'date', precision: 3 })
     .$onUpdate(() => new Date()),
   refreshToken: p.varchar(),
+  resetPasswordToken: p.text('reset_token'),
+  resetPasswordExpires: p.timestamp('reset_expires'),
 });
 
-export type User = InferSelectModel<typeof UserTable>;
+export type User = InferSelectModel<typeof userTable>;
