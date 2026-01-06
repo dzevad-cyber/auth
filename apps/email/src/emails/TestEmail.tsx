@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Html,
   Head,
@@ -11,7 +10,7 @@ import {
   Tailwind,
 } from '@react-email/components';
 
-export const WelcomeEmail = ({ name }: Props) => {
+const TestEmail = () => {
   return (
     <Html>
       <Head />
@@ -20,12 +19,10 @@ export const WelcomeEmail = ({ name }: Props) => {
         <Body className="bg-amber-400">
           <Container>
             <Section>
-              <Text>Hi {name},</Text>
+              <Text>Hi there,</Text>
               <Text>Welcome to our community! We are glad to have you.</Text>
             </Section>
-            <Button>Hello</Button>
             <Button href="http://localhost:3000">Go to</Button>
-            <Button href="http://localhost:3000">dummy</Button>
           </Container>
         </Body>
       </Tailwind>
@@ -33,8 +30,4 @@ export const WelcomeEmail = ({ name }: Props) => {
   );
 };
 
-export default WelcomeEmail;
-
-type Props = {
-  name: string;
-};
+export default TestEmail;

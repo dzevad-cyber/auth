@@ -29,7 +29,7 @@ export const forgotPassword: RequestHandler = async (req, res) => {
     .where(eq(userTable.id, user.id));
 
   // send email
-  await sendEmail();
+  await sendEmail(user.firstName);
 
   return res.status(200).json({
     message: 'Please check your email for reset password link.',

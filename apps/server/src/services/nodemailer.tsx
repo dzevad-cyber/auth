@@ -1,5 +1,5 @@
 import { WelcomeEmail } from '@auth/email';
-import { render } from '@react-email/render';
+import { pretty, render } from '@react-email/render';
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
@@ -7,22 +7,23 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'gaetano.schneider11@ethereal.email',
-    pass: 'XXRr3MvH923QR9ZVjF',
+    user: process.env.ETHEREAL_USERNAME,
+    pass: process.env.ETHEREAL_PASSWORD,
   },
 });
 
-export const sendEmail = async () => {
-  const welcomeHtml = await render(<WelcomeEmail />);
+export const sendEmail = async (name: string) => {
+  const welcomeHtml = await render(<WelcomeEmail name={name} />);
+  console.log('[ nodemailer.tsx - 17 ] - html:', await pretty(welcomeHtml));
 
   const info = await transporter.sendMail({
-    from: '"Gaetano Schneider" <gaetano.schneider11@ethereal.email>',
+    from: `${process.env.ETHEREAL_NAME} ${process.env.ETHEREAL_USERNAME}`,
     to: 'testUserOne@example.com',
-    subject: 'test email',
+    subject: 'test email 3',
     text: 'test text',
     html: welcomeHtml,
   });
 
-  console.log('[ nodemailer.ts - 22 ] - info:', info);
-  console.log('[ nodemailer.ts - 22 ] - Message sent:', info.messageId);
+  // console.log('[ nodemailer.ts - 22 ] - info:', info);
+  // console.log('[ nodemailer.ts - 22 ] - Message sent:', info.messageId);
 };

@@ -35,8 +35,10 @@ services:
       - ./apps/server:/usr/src/apps/server
       - pnpm_node_modules_cache:/usr/src/node_modules
       - ./packages/shared:/usr/src/packages/shared
+      - ./apps/email:/usr/src/apps/email
     ports:
       - 5000:5000
+      - 3001:3001
     env_file:
       - ./apps/server/.env.dev
     networks:
