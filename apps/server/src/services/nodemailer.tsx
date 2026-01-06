@@ -24,6 +24,5 @@ export const sendEmail = async (name: string) => {
     html: welcomeHtml,
   });
 
-  // console.log('[ nodemailer.ts - 22 ] - info:', info);
-  // console.log('[ nodemailer.ts - 22 ] - Message sent:', info.messageId);
+  console.log('[ nodemailer.ts - 22 ] - email sent:', info.messageId);
 };
