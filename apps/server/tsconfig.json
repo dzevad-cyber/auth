@@ -11,7 +11,7 @@
     "module": "nodenext",
     "target": "esnext",
     // For nodejs:
-    "lib": ["esnext"],
+    "lib": ["ESNext", "DOM"],
     "types": ["node"],
     // and npm install -D @types/node
 
@@ -35,15 +35,26 @@
     // Recommended Options
     "strict": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "emitDeclarationOnly": true
+    "emitDeclarationOnly": true,
+    "baseUrl": ".",
+    "paths": {
+      "@auth/email": ["../email/src/index.ts"]
+    }
   },
   "extends": "../../tsconfig.json",
   "exclude": ["node_modules"],
-  "include": ["./src/**/*", "./env.d.ts", "./src/globals/types"]
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./env.d.ts",
+    "./src/globals/types"
+  ],
+  "references": [{ "path": "../email" }]
 }

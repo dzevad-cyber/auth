@@ -15,6 +15,7 @@ app.use(
     credentials: true,
   }),
 );
+
 app.use(morgan('dev'));
 
 app.use('/api/v1', v1Router);
