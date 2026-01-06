@@ -1,3 +1,5 @@
+import { WelcomeEmail } from '@auth/email';
+import { render } from '@react-email/render';
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
@@ -11,12 +13,14 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendEmail = async () => {
+  const welcomeHtml = await render(<WelcomeEmail />);
+
   const info = await transporter.sendMail({
     from: '"Gaetano Schneider" <gaetano.schneider11@ethereal.email>',
     to: 'testUserOne@example.com',
     subject: 'test email',
     text: 'test text',
-    html: '<b><a href="http://localhost:3000">Reset Password</a></b>',
+    html: welcomeHtml,
   });
 
   console.log('[ nodemailer.ts - 22 ] - info:', info);

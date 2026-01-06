@@ -9,13 +9,19 @@ COPY package.json pnpm-lock.yaml ./
 COPY pnpm-workspace.yaml .
 COPY tsconfig.json .
 
-# apps files
+# client files
 COPY apps/client/package.json ./apps/client/
-COPY apps/server/package.json ./apps/server/
 COPY apps/client/tsconfig.json ./apps/client/
+
+# server files
+COPY apps/server/package.json ./apps/server/
 COPY apps/server/tsconfig.json ./apps/server/
 
-# shared 
+# email files
+COPY apps/email/package.json ./apps/email/
+COPY apps/email/tsconfig.json ./apps/email/
+
+# shared files
 COPY packages/shared/package.json ./packages/shared/
 COPY packages/shared/tsconfig.json ./packages/shared/
 

@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve", // Critical: Let the email engine handle the JSX transformation
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/emails/*": ["./src/emails/*"]
+    },
+    "declarationMap": true,
+    "declaration": true
+  },
+  "include": ["./src/emails/**/*.tsx", "./src/index.ts"],
+  "exclude": ["node_modules"]
+}
