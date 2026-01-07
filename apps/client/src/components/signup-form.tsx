@@ -16,6 +16,8 @@ import { Input } from '@/components/ui/input'
 import { Link } from '@tanstack/react-router'
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
+  // const form = useForm
+
   return (
     <Card {...props}>
       <CardHeader>
@@ -28,18 +30,17 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         <form>
           <FieldGroup>
             <Field>
-              <FieldLabel htmlFor="name">Full Name</FieldLabel>
-              <Input
-                // id="name"
-                type="text"
-                placeholder="John Doe"
-                required
-              />
+              <FieldLabel htmlFor="firstName">First name</FieldLabel>
+              <Input id="name" type="text" placeholder="John Doe" required />
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="lastName">Last name</FieldLabel>
+              <Input id="name" type="text" placeholder="John Doe" required />
             </Field>
             <Field>
               <FieldLabel htmlFor="email">Email</FieldLabel>
               <Input
-                // id='email'
+                id="email"
                 type="email"
                 placeholder="m@example.com"
                 required
@@ -51,24 +52,16 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             </Field>
             <Field>
               <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input
-                // id="password"
-                type="password"
-                required
-              />
+              <Input id="password" type="password" required />
               <FieldDescription>
                 Must be at least 8 characters long.
               </FieldDescription>
             </Field>
             <Field>
-              <FieldLabel htmlFor="confirm-password">
+              <FieldLabel htmlFor="confirmPassword">
                 Confirm Password
               </FieldLabel>
-              <Input
-                // id="confirm-password"
-                type="password"
-                required
-              />
+              <Input id="confirm-password" type="password" required />
               <FieldDescription>Please confirm your password.</FieldDescription>
             </Field>
             <FieldGroup>
