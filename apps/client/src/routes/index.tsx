@@ -1,9 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router';
-
-const App = () => {
-  return <div>hello world</div>;
-};
+import { createFileRoute } from '@tanstack/react-router'
+import logo from '../logo.svg'
 
 export const Route = createFileRoute('/')({
-  component: App,
-});
+  component: Home,
+})
+
+function Home() {
+  return <header className="">home page</header>
+}
