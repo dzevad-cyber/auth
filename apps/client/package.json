@@ -1,9 +1,9 @@
 {
-  "name": "@auth/client",
+  "name": "client",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently --raw \"vite --port 3000\" \"pnpm --filter @auth/shared dev\"",
+    "dev": "vite --port 3000",
     "build": "vite build && tsc",
     "preview": "vite preview",
     "test": "vitest run",
@@ -12,9 +12,13 @@
     "check": "prettier --write . && eslint --fix"
   },
   "dependencies": {
-    "@auth/shared": "workspace:1.0.0",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-separator": "^1.1.8",
+    "@radix-ui/react-slot": "^1.2.4",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/react-devtools": "^0.7.0",
+    "@tanstack/react-query": "^5.66.5",
+    "@tanstack/react-query-devtools": "^5.84.2",
     "@tanstack/react-router": "^1.132.0",
     "@tanstack/react-router-devtools": "^1.132.0",
     "@tanstack/router-plugin": "^1.132.0",
