@@ -15,7 +15,6 @@ export interface MyRouterContext {
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
     <div className="grid h-screen">
-      <Header />
       <Outlet />
       <TanStackDevtools
         config={{
