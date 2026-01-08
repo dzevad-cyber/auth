@@ -26,4 +26,7 @@ clean: ## clean all
 build-up: build up ## builds imgage without cache and runs containers
 
 .PHONY: down-up
-down-up: down up ## builds imgage without cache and runs containers
+down-up: down up ## removes containers, orphan containers, volumes, network and then starts container
+
+.PHONY: down-build-up
+down-up: down build up ## removes containers, networks, volumes, builds image without cache and then starts container
