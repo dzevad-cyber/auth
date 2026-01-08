@@ -1,20 +1,20 @@
 import express, { type Router } from 'express';
-import { register } from './register/register.ts';
+import { signUp } from './signup/signup.js';
 import { login } from './login/login.ts';
 import { getAuthenticatedUser } from './auth-user/getAuthUser.ts';
 import { authenticateToken } from './middlewares/authenticateToken.ts';
 import { getRefreshToken } from './refresh-token/getRefreshToken.ts';
 import { logout } from './logout/logout.ts';
 import { validateLoginReqBody } from './login/login.middlewares.ts';
-import { validateReqisterReqBody } from './register/register.middlewares.ts';
 import { forgotPassword } from './forget-password/forgotPassword.ts';
 import { validateForgotPasswordReqBody } from './forget-password/forgotPassword.middlewares.ts';
 import { resetPassword } from './reset-password/resetPassword.ts';
 import { validateResetPasswordReqBody } from './reset-password/resetPassword.middleware.ts';
+import { validateSignUpReqBody } from './signup/signup.middlewares.ts';
 
 export const authRouter: Router = express.Router();
 
-authRouter.post('/register', [validateReqisterReqBody], register);
+authRouter.post('/signup', [validateSignUpReqBody], signUp);
 authRouter.post('/login', [validateLoginReqBody], login);
 authRouter.get('/user', [authenticateToken], getAuthenticatedUser);
 authRouter.post('/refresh', getRefreshToken);

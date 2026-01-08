@@ -3,7 +3,7 @@ import { hash } from '../../../services/bcrypt.ts';
 import { db } from '../../../db/db.ts';
 import { userTable } from '../../../db/schema/userSchema.ts';
 
-export const register: RequestHandler = async (req, res, _next) => {
+export const signUp: RequestHandler = async (req, res, _next) => {
   const hashedPassword = await hash(req.body.password);
 
   const [user] = await db

@@ -1,10 +1,10 @@
 import type { RequestHandler } from 'express';
 import * as z from 'zod';
-import { registerReqBody } from './register.validator.ts';
+import { signUpReqBody } from './signup.validator.js';
 import { AppError } from '../../../lib/errors/appError.ts';
 
-export const validateReqisterReqBody: RequestHandler = (req, res, next) => {
-  const parsedReqBody = registerReqBody.safeParse(req.body);
+export const validateSignUpReqBody: RequestHandler = (req, res, next) => {
+  const parsedReqBody = signUpReqBody.safeParse(req.body);
 
   if (!parsedReqBody.success) {
     throw new AppError(z.prettifyError(parsedReqBody.error), 400, {

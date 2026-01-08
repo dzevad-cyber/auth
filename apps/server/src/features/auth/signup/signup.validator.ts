@@ -1,6 +1,6 @@
 import * as z from 'zod';
 
-export const registerReqBody = z
+export const signUpReqBody = z
   .object({
     firstName: z.string().min(3).max(30),
     lastName: z.string().min(3).max(30),
