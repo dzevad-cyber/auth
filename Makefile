@@ -19,7 +19,7 @@ clean: ## clean all
 	docker system prune;
 	docker builder prune;
 	docker volume prune;
-	docker image rmi $(docker images -q)
+	docker image prune -af
 # 	docker image rmi $(docker images -aq);
 
 .PHONY: up build
