@@ -30,7 +30,13 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@auth/shared": ["../../packages/shared/src/index.ts"]
     }
-  }
+  },
+  "references": [
+    {
+      "path": "../../packages/shared"
+    }
+  ]
 }

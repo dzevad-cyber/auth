@@ -4,6 +4,7 @@ import cors from 'cors';
 import { globalErrorHandler } from './globals/middlewares/error.handler.middleware.ts';
 import { v1Router } from './api/v1.ts';
 import cookieParser from 'cookie-parser';
+import { apiV1Paths } from '@auth/shared';
 
 const app: Application = express();
 
@@ -18,7 +19,7 @@ app.use(
 
 app.use(morgan('dev'));
 
-app.use('/api/v1', v1Router);
+app.use(`/${apiV1Paths.basePath}`, v1Router);
 
 app.all('/*notFoundRoutes', (req, res) => {
   res.status(404).json({
