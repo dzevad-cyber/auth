@@ -1,24 +1,23 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@/components/ui/card';
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-import { Link } from '@tanstack/react-router'
-import { useCreateUser } from './mutations/signUp.mutation'
+} from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
+import { Link } from '@tanstack/react-router';
+import { useCreateUser } from './mutations/signUp.mutation';
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
-  const { mutate } = useCreateUser()
-
+  const { mutate } = useCreateUser();
   return (
     <Card {...props}>
       <Button
@@ -29,7 +28,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
             email: 's@ss.com',
             password: '123456789',
             passwordConfirm: '123456789',
-          })
+          });
         }}
       >
         signup
@@ -93,5 +92,5 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         </form>
       </CardContent>
     </Card>
-  )
+  );
 }
