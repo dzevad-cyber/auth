@@ -11,22 +11,25 @@ import { validateForgotPasswordReqBody } from './forget-password/forgotPassword.
 import { resetPassword } from './reset-password/resetPassword.ts';
 import { validateResetPasswordReqBody } from './reset-password/resetPassword.middleware.ts';
 import { validateSignUpReqBody } from './signup/signup.middlewares.ts';
+import { apiV1Paths } from '@auth/shared';
+
+const { auth } = apiV1Paths;
 
 export const authRouter: Router = express.Router();
 
-authRouter.post('/signup', [validateSignUpReqBody], signUp);
-authRouter.post('/login', [validateLoginReqBody], login);
-authRouter.get('/user', [authenticateToken], getAuthenticatedUser);
-authRouter.post('/refresh', getRefreshToken);
-authRouter.post('/logout', logout);
+authRouter.post(`/${auth.signUp}`, [validateSignUpReqBody], signUp);
+authRouter.post(`/${auth.login}`, [validateLoginReqBody], login);
+authRouter.get(`/${auth.user}`, [authenticateToken], getAuthenticatedUser);
+authRouter.post(`/${auth.refresh}`, getRefreshToken);
+authRouter.post(`/${auth.logout}`, logout);
 authRouter.post(
-  '/forgot-password',
+  `/${auth.forgotPassword}`,
   [validateForgotPasswordReqBody],
   forgotPassword,
 );
 
 authRouter.post(
-  '/reset-password',
+  `/${auth.resetPassword}`,
   [validateResetPasswordReqBody],
   resetPassword,
 );

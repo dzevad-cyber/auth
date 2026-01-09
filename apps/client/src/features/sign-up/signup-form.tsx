@@ -21,6 +21,19 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
 
   return (
     <Card {...props}>
+      <Button
+        onClick={() => {
+          mutate({
+            firstName: 'john',
+            lastName: 'snow',
+            email: 's@ss.com',
+            password: '123456789',
+            passwordConfirm: '123456789',
+          })
+        }}
+      >
+        signup
+      </Button>
       <CardHeader>
         <CardTitle>Create an account</CardTitle>
         <CardDescription>

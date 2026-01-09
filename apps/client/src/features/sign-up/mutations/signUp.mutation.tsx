@@ -1,5 +1,6 @@
 import { _axios } from '@/services/axios'
 import { useMutation } from '@tanstack/react-query'
+import { apiV1FullPaths } from '@auth/shared'
 
 export const useCreateUser = () => {
   return useMutation({
@@ -18,8 +19,7 @@ export const useCreateUser = () => {
 const createUser = async (params: CreateUserParams) => {
   const { firstName, lastName, password, passwordConfirm, email } = params
 
-  console.log('[ signUp.mutation.tsx - 17 ] - params:', params)
-  const res = await _axios.post(`/auth/signup`, {
+  const res = await _axios.post(apiV1FullPaths.signUp, {
     firstName,
     lastName,
     password,

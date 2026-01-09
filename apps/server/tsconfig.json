@@ -44,7 +44,8 @@
     "emitDeclarationOnly": true,
     "baseUrl": ".",
     "paths": {
-      "@auth/email": ["../email/src/index.ts"]
+      "@auth/email": ["../email/src/index.ts"],
+      "@auth/shared": ["../../packages/shared/src/index.ts"]
     }
   },
   "extends": "../../tsconfig.json",
@@ -55,5 +56,10 @@
     "./env.d.ts",
     "./src/globals/types"
   ],
-  "references": [{ "path": "../email" }]
+  "references": [
+    { "path": "../email" },
+    {
+      "path": "../../packages/shared"
+    }
+  ]
 }
