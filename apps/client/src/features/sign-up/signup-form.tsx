@@ -28,19 +28,6 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Button
-          onClick={() =>
-            mutate({
-              firstName: 'john',
-              lastName: 'doe',
-              email: 'a@a.com',
-              password: '123456',
-              confirmPassword: '123456',
-            })
-          }
-        >
-          update
-        </Button>
         <form>
           <FieldGroup>
             <Field>
