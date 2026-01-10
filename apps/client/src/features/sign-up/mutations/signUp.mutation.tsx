@@ -1,23 +1,20 @@
-import { _axios } from '@/services/axios'
-import { useMutation } from '@tanstack/react-query'
-import { apiV1FullPaths } from '@auth/shared'
+import { _axios } from '@/services/axios';
+import { useMutation } from '@tanstack/react-query';
+import { apiV1FullPaths } from '@auth/shared';
 
 export const useCreateUser = () => {
   return useMutation({
     mutationFn: async (params: CreateUserParams) => {
-      return await createUser(params)
-    },
-    onSuccess: (data) => {
-      console.log('[ signUp.mutation.tsx - 17 ] - data:', data)
+      return await createUser(params);
     },
     onError: (error) => {
-      console.error('[ signUp.mutation.tsx - 17 ] - error:', error)
+      console.error('[ signUp.mutation.tsx - 17 ] - error:', error);
     },
-  })
-}
+  });
+};
 
 const createUser = async (params: CreateUserParams) => {
-  const { firstName, lastName, password, passwordConfirm, email } = params
+  const { firstName, lastName, password, passwordConfirm, email } = params;
 
   const res = await _axios.post(apiV1FullPaths.signUp, {
     firstName,
@@ -25,15 +22,15 @@ const createUser = async (params: CreateUserParams) => {
     password,
     passwordConfirm,
     email,
-  })
+  });
 
-  return res
-}
+  return res;
+};
 
 type CreateUserParams = {
-  firstName: string
-  lastName: string
-  password: string
-  email: string
-  passwordConfirm: string
-}
+  firstName: string;
+  lastName: string;
+  password: string;
+  email: string;
+  passwordConfirm: string;
+};

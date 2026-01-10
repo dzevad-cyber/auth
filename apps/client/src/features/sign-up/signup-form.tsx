@@ -14,13 +14,16 @@ import {
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { useCreateUser } from './mutations/signUp.mutation';
 import { useForm } from '@tanstack/react-form';
 import { signUpSchema } from '@auth/shared';
+import { Spinner } from '@/components/ui/spinner';
+import { toast } from 'sonner';
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
-  const { mutate } = useCreateUser();
+  const { mutate, isPending } = useCreateUser();
+  const navigate = useNavigate();
 
   const form = useForm({
     defaultValues: {
@@ -34,7 +37,17 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       onSubmit: signUpSchema,
     },
     onSubmit: async ({ value }) => {
-      mutate(value);
+      mutate(value, {
+        onSuccess: () => {
+          form.reset();
+          toast.success('Account created successfully', {
+            description: 'You can now sign in',
+          });
+          navigate({
+            to: '/login',
+          });
+        },
+      });
     },
   });
 
@@ -201,7 +214,9 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
 
             <FieldGroup>
               <Field>
-                <Button type="submit">Create Account</Button>
+                <Button disabled={isPending} type="submit">
+                  {isPending ? <Spinner /> : 'Create Account'}
+                </Button>
                 <Button variant="outline" type="button">
                   Sign up with Google
                 </Button>
