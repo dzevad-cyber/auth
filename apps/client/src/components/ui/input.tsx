@@ -1,8 +1,8 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
 
-function Input({ className, type, ...props }: InputProps) {
+function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
   return (
     <input
       type={type}
@@ -15,11 +15,7 @@ function Input({ className, type, ...props }: InputProps) {
       )}
       {...props}
     />
-  )
+  );
 }
 
-export { Input }
-
-interface InputProps extends React.ComponentProps<'input'> {
-  id?: string
-}
+export { Input };
