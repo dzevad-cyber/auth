@@ -50,7 +50,7 @@ const Button: React.FC<Props> = ({
     data-size={size}
     className={cn(buttonVariants({ variant, size, className }))}
     {...props}
-  ></motion.button>
+  />
 );
 
 export { Button, buttonVariants };
