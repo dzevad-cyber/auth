@@ -1,5 +1,5 @@
 import type { ExternalToast } from 'sonner';
-import { AnimatedCheckIcon } from '../icons/animated/AnimatedCheckIcon';
+import { AnimatedCheckIcon } from '../animation/icons/AnimatedCheckIcon';
 
 export const toasts: Toasts = {
   success: {
