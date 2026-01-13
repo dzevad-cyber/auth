@@ -21,10 +21,10 @@ export const AnimatedCheckIcon = ({
         xmlns="http://www.w3.org/2000/svg"
       >
         <motion.path
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
           transition={{
-            delay: 0.2,
+            delay: 0.3,
             duration: 0.5,
           }}
           d="M4 12 9 17L20 6"
