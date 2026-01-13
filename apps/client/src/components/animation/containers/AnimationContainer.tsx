@@ -2,6 +2,7 @@ import { motion, type HTMLMotionProps } from 'motion/react';
 
 const AnimatedContainer: React.FC<AnimatedContainerProps> = (props) => {
   console.log('[ AnimationContainer.tsx - 4 ] - :', 'test');
+  console.log('[ AnimationContainer.tsx - 4 ] - :', 'test 1');
 
   return (
     <motion.div
