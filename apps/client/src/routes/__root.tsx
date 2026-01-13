@@ -27,7 +27,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
           TanStackQueryDevtools,
         ]}
       />
-      <Toaster duration={2000} />
+      <Toaster className="animate-slide-up" />
     </div>
   ),
 });

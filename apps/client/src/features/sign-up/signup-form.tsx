@@ -20,6 +20,7 @@ import { useForm } from '@tanstack/react-form';
 import { signUpSchema } from '@auth/shared';
 import { Spinner } from '@/components/ui/spinner';
 import { toast } from 'sonner';
+import { toasts } from '@/components/toast/toasts';
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const { mutate, isPending } = useCreateUser();
@@ -40,9 +41,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       mutate(value, {
         onSuccess: () => {
           form.reset();
-          toast.success('Account created successfully', {
-            description: 'You can now sign in',
-          });
+          toast.success(toasts.success.title, toasts.success.data);
           navigate({
             to: '/login',
           });
