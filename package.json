@@ -11,7 +11,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.26.2",
+  "packageManager": "pnpm@10.28.0",
   "dependencies": {
     "concurrently": "^9.2.1",
     "typescript": "^5.9.3",
