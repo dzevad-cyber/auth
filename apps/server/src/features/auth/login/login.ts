@@ -30,21 +30,15 @@ export const login: RequestHandler = async (req, res) => {
     })
     .returning();
 
-  res.cookie('accessToken', accessToken, {
-    httpOnly: true,
-    maxAge: 15 * 60 * 1000,
-    sameSite: 'lax',
-    secure: true,
-  });
-
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
-    sameSite: 'lax',
+    sameSite: 'strict',
     secure: true,
   });
 
   return res.status(200).json({
     message: 'You successfully logged in.',
+    accessToken,
   });
 };
