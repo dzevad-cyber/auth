@@ -15,46 +15,15 @@ import {
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 import AnimatedContainer from '../../../components/animation/containers/AnimationContainer';
-import { useForm } from '@tanstack/react-form';
-import { loginSchema } from '@auth/shared';
-import { useLoginUser } from './mutations/login.mutation';
-import { toast } from 'sonner';
-import { getSuccessToast } from '@/components/toast/toasts';
+import { useFormLogin } from './hooks/useLoginForm.hook';
 
 export const LoginForm: React.FC<React.ComponentProps<'div'>> = ({
   className,
   ...props
 }) => {
-  const navigate = useNavigate();
-  const { mutate } = useLoginUser();
-
-  const form = useForm({
-    defaultValues: {
-      email: '',
-      password: '',
-    },
-    validators: {
-      onSubmit: loginSchema,
-    },
-    onSubmit: async ({ value }) => {
-      mutate(value, {
-        onSuccess: () => {
-          form.reset();
-          toast.success(
-            ...getSuccessToast(
-              'You successfully logged in',
-              'Thanks for logging in! We hope you enjoy using our services!',
-            ),
-          );
-          navigate({
-            to: '/sign-up',
-          });
-        },
-      });
-    },
-  });
+  const form = useFormLogin();
 
   return (
     <AnimatedContainer>
