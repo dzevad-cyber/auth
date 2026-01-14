@@ -16,7 +16,6 @@ app.use(
   }),
 );
 app.use(cookieParser());
-
 app.use(morgan('dev'));
 
 app.use(`/${apiV1Paths.basePath}`, v1Router);
