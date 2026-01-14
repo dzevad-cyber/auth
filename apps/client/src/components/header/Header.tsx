@@ -1,30 +1,34 @@
-import { Link } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router';
 
-import { useState } from 'react'
-import { CircleUserRound, Home, LogIn, Menu, Network, X } from 'lucide-react'
+import { useState } from 'react';
+import { CircleUserRound, Home, LogIn, Menu, X } from 'lucide-react';
+import HeaderAuthSection from './HeaderAuthSection';
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
-      <header className="p-4 flex items-center bg-gray-800 text-white shadow-lg">
-        <button
-          onClick={() => setIsOpen(true)}
-          className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
-          aria-label="Open menu"
-        >
-          <Menu size={24} />
-        </button>
-        <h1 className="ml-4 text-xl font-semibold">
-          <Link to="/">
-            <img
-              src="/tanstack-word-logo-white.svg"
-              alt="TanStack Logo"
-              className="h-10"
-            />
-          </Link>
-        </h1>
+      <header className="p-4 grid items-center bg-gray-800 text-white shadow-lg grid-flow-col">
+        <div className="grid grid-flow-col justify-start">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+            aria-label="Open menu"
+          >
+            <Menu size={24} />
+          </button>
+          <h1 className="ml-4 text-xl font-semibold">
+            <Link to="/">
+              <img
+                src="/tanstack-word-logo-white.svg"
+                alt="TanStack Logo"
+                className="h-10"
+              />
+            </Link>
+          </h1>
+        </div>
+        <HeaderAuthSection />
       </header>
 
       <aside
@@ -83,5 +87,5 @@ export default function Header() {
         </nav>
       </aside>
     </div>
-  )
+  );
 }
