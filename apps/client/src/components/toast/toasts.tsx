@@ -1,11 +1,13 @@
-import type { ExternalToast } from 'sonner';
 import { AnimatedCheckIcon } from '../animation/icons/AnimatedCheckIcon';
 
-export const toasts: Toasts = {
-  success: {
-    title: 'Account created successfully',
-    data: {
-      description: 'You can now sign in',
+export const getSuccessToast = (
+  title: string,
+  description: string = '',
+): [string, Record<string, any>] => {
+  return [
+    title,
+    {
+      description,
       style: {
         '--normal-bg':
           'light-dark(var(--color-green-600), var(--color-green-400))',
@@ -19,12 +21,5 @@ export const toasts: Toasts = {
       },
       icon: <AnimatedCheckIcon />,
     },
-  },
-};
-
-type Toasts = {
-  success: {
-    title: string;
-    data: ExternalToast;
-  };
+  ];
 };

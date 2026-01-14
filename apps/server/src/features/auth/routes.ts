@@ -20,7 +20,7 @@ export const authRouter: Router = express.Router();
 authRouter.post(`/${auth.signUp}`, [validateSignUpReqBody], signUp);
 authRouter.post(`/${auth.login}`, [validateLoginReqBody], login);
 authRouter.get(`/${auth.user}`, [authenticateToken], getAuthenticatedUser);
-authRouter.post(`/${auth.refresh}`, getRefreshToken);
+authRouter.get(`/${auth.refresh}`, getRefreshToken);
 authRouter.post(`/${auth.logout}`, logout);
 authRouter.post(
   `/${auth.forgotPassword}`,
