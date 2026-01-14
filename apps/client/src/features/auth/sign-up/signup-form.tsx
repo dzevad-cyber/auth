@@ -22,39 +22,10 @@ import { Spinner } from '@/components/ui/spinner';
 import { toast } from 'sonner';
 import { getSuccessToast } from '@/components/toast/toasts';
 import AnimatedContainer from '@/components/animation/containers/AnimationContainer';
+import { useSignupForm } from './hooks/useSignupForm.hook';
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
-  const { mutate, isPending } = useCreateUser();
-  const navigate = useNavigate();
-
-  const form = useForm({
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
-    },
-    validators: {
-      onSubmit: signUpSchema,
-    },
-    onSubmit: async ({ value }) => {
-      mutate(value, {
-        onSuccess: () => {
-          form.reset();
-          toast.success(
-            ...getSuccessToast(
-              'Account created successfully',
-              'You can now sign in',
-            ),
-          );
-          navigate({
-            to: '/login',
-          });
-        },
-      });
-    },
-  });
+  const { form, isPending } = useSignupForm();
 
   return (
     <AnimatedContainer>
