@@ -20,7 +20,7 @@ import { useForm } from '@tanstack/react-form';
 import { signUpSchema } from '@auth/shared';
 import { Spinner } from '@/components/ui/spinner';
 import { toast } from 'sonner';
-import { toasts } from '@/components/toast/toasts';
+import { getSuccessToast } from '@/components/toast/toasts';
 import AnimatedContainer from '@/components/animation/containers/AnimationContainer';
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
@@ -42,7 +42,12 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       mutate(value, {
         onSuccess: () => {
           form.reset();
-          toast.success(toasts.success.title, toasts.success.data);
+          toast.success(
+            ...getSuccessToast(
+              'Account created successfully',
+              'You can now sign in',
+            ),
+          );
           navigate({
             to: '/login',
           });

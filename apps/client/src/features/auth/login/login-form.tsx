@@ -21,6 +21,7 @@ import { useForm } from '@tanstack/react-form';
 import { loginSchema } from '@auth/shared';
 import { useLoginUser } from './mutations/login.mutation';
 import { toast } from 'sonner';
+import { getSuccessToast } from '@/components/toast/toasts';
 
 export const LoginForm: React.FC<React.ComponentProps<'div'>> = ({
   className,
@@ -41,7 +42,12 @@ export const LoginForm: React.FC<React.ComponentProps<'div'>> = ({
       mutate(value, {
         onSuccess: () => {
           form.reset();
-          toast.success('Login successful!');
+          toast.success(
+            ...getSuccessToast(
+              'You successfully logged in',
+              'Thanks for logging in! We hope you enjoy using our services!',
+            ),
+          );
           navigate({
             to: '/sign-up',
           });
