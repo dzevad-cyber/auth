@@ -8,7 +8,6 @@ export const _axios = axios.create({
 
 _axios.interceptors.request.use((config) => {
   const { accessToken } = useClientStore.getState();
-  console.log('[ axios.ts - 10 ] - accessToken:', accessToken);
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }

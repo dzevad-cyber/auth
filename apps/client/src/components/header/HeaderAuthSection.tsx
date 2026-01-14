@@ -5,13 +5,8 @@ import { useGetAuthenticatedUserQuery } from '@/features/auth/current-user/queri
 
 const HeaderAuthSection: React.FC<unknown> = () => {
   const navigate = useNavigate();
-  // get current user
-  // if current user show profile button
-  // if not show login and sign up button
   const { data } = useGetAuthenticatedUserQuery();
-  console.log('[ HeaderAuthSection.tsx - 12 ] - data:', data);
 
-  console.log('[ HeaderAuthSection.tsx - 13 ] - data:', data);
   return (
     <div className="grid grid-flow-col justify-end gap-x-5">
       {data ? (
