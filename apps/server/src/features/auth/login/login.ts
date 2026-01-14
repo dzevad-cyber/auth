@@ -12,7 +12,7 @@ export const login: RequestHandler = async (req, res) => {
     .from(userTable)
     .where(eq(userTable.email, req.body.email));
 
-  if (!registeredUser) throw new AppError(USER_BAD_REQUEST_ERR_MESSAGE, 404);
+  if (!registeredUser) throw new AppError(USER_BAD_REQUEST_ERR_MESSAGE, 400);
 
   const passwordMatch = await bcrypt.compare(
     req.body.password,
@@ -34,7 +34,7 @@ export const login: RequestHandler = async (req, res) => {
     httpOnly: true,
     maxAge: 7 * 24 * 60 * 60 * 1000,
     sameSite: 'lax',
-    // secure: true,
+    secure: true,
   });
 
   return res.status(200).json({

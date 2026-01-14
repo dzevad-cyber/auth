@@ -10,7 +10,9 @@ const HeaderAuthSection: React.FC<unknown> = () => {
   return (
     <div className="grid grid-flow-col justify-end gap-x-5">
       {data ? (
-        <div>logged in successfully</div>
+        <div>
+          Hello, {data.user.firstName} {data.user.lastName}
+        </div>
       ) : (
         <>
           <Button

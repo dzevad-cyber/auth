@@ -1,9 +1,11 @@
 import { useClientStore } from '@/client-store/client.store';
 import { getSuccessToast } from '@/components/toast/toasts';
+import { queryClient } from '@/integrations/tanstack-query/root-provider';
 import { _axios } from '@/services/axios';
 import { apiV1FullPaths, loginSchema } from '@auth/shared';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
+import { AxiosError } from 'axios';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
@@ -15,12 +17,16 @@ export const useLoginUser = () => {
     mutationFn: async (params: LoginParams) => {
       return await loginUser(params);
     },
-    onError: (error) => {
-      console.error('[ login.mutation.tsx - 12 ] - error:', error);
+    onError: (err) => {
+      if (err instanceof AxiosError) {
+        toast.error(err.response?.data.message);
+      }
     },
     onSuccess: (res) => {
       const { data } = res;
       setAccessToken(data.accessToken);
+      queryClient.setQueryData(['accessToken'], data.accessToken);
+
       toast.success(
         ...getSuccessToast(
           data.message,

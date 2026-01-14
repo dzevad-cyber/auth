@@ -33,12 +33,6 @@ export const getRefreshToken: RequestHandler = async (req, res) => {
     },
   );
 
-  res.cookie('accessToken', newAccessToken, {
-    secure: true,
-    httpOnly: true,
-    maxAge: 15 * 60 * 1000, // 15 mins
-  });
-
   return res.status(200).json({
     accessToken: newAccessToken,
   });
