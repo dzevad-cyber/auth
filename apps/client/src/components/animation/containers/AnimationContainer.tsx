@@ -14,7 +14,7 @@ const AnimatedContainer: React.FC<AnimatedContainerProps> = (props) => {
         ease: 'easeOut',
       }}
       {...props}
-    ></motion.div>
+    />
   );
 };
 
