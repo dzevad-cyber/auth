@@ -1,4 +1,4 @@
-import { useClientStore } from '@/client-store/client.store';
+import { queryClient } from '@/integrations/tanstack-query/root-provider';
 import axios from 'axios';
 
 export const _axios = axios.create({
@@ -7,7 +7,8 @@ export const _axios = axios.create({
 });
 
 _axios.interceptors.request.use((config) => {
-  const { accessToken } = useClientStore.getState();
+  const accessToken = queryClient.getQueryData<string>(['accessToken']);
+
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }

@@ -1,6 +1,7 @@
 import { _axios } from '@/services/axios';
 import { apiV1FullPaths } from '@auth/shared';
 import { useQuery } from '@tanstack/react-query';
+import * as z from 'zod';
 
 export const useGetAuthenticatedUserQuery = () => {
   return useQuery({
@@ -12,5 +13,17 @@ export const useGetAuthenticatedUserQuery = () => {
 async function getAuthenticatedUser() {
   const res = await _axios.get(`${apiV1FullPaths.user}`);
 
-  return res.data;
+  const parsedRes = AuthUserResSchema.safeParse(res.data);
+  if (!parsedRes.success) {
+    throw new Error(parsedRes.error.message);
+  }
+
+  return parsedRes.data;
 }
+
+const AuthUserResSchema = z.object({
+  user: z.object({
+    firstName: z.string(),
+    lastName: z.string(),
+  }),
+});
