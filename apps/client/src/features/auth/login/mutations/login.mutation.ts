@@ -28,7 +28,7 @@ export const useLoginUser = () => {
         ),
       );
       navigate({
-        to: '/sign-up',
+        to: '/',
       });
     },
   });

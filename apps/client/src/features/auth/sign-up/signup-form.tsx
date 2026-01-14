@@ -14,13 +14,8 @@ import {
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { Link, useNavigate } from '@tanstack/react-router';
-import { useCreateUser } from './mutations/signUp.mutation';
-import { useForm } from '@tanstack/react-form';
-import { signUpSchema } from '@auth/shared';
+import { Link } from '@tanstack/react-router';
 import { Spinner } from '@/components/ui/spinner';
-import { toast } from 'sonner';
-import { getSuccessToast } from '@/components/toast/toasts';
 import AnimatedContainer from '@/components/animation/containers/AnimationContainer';
 import { useSignupForm } from './hooks/useSignupForm.hook';
 
