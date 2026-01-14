@@ -12,14 +12,14 @@ export const login: RequestHandler = async (req, res) => {
     .from(userTable)
     .where(eq(userTable.email, req.body.email));
 
-  if (!registeredUser) throw new AppError('User not found.', 404);
+  if (!registeredUser) throw new AppError(USER_BAD_REQUEST_ERR_MESSAGE, 404);
 
   const passwordMatch = await bcrypt.compare(
     req.body.password,
     registeredUser.password,
   );
 
-  if (!passwordMatch) throw new AppError('Invalid password', 400);
+  if (!passwordMatch) throw new AppError(USER_BAD_REQUEST_ERR_MESSAGE, 400);
 
   const { accessToken, refreshToken } = getTokens(registeredUser);
 
@@ -42,3 +42,6 @@ export const login: RequestHandler = async (req, res) => {
     accessToken,
   });
 };
+
+const USER_BAD_REQUEST_ERR_MESSAGE =
+  'Your email or password is incorrect. Please try again.';
