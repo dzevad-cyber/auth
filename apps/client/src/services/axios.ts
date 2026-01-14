@@ -9,8 +9,6 @@ export const _axios = axios.create({
 _axios.interceptors.request.use((config) => {
   const accessToken = queryClient.getQueryData<string>(['accessToken']);
 
-  console.log('[ axios.ts - 17 ] - accessToken:', accessToken);
-
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
