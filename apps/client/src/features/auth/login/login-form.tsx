@@ -18,12 +18,13 @@ import { Input } from '@/components/ui/input';
 import { Link } from '@tanstack/react-router';
 import AnimatedContainer from '../../../components/animation/containers/AnimationContainer';
 import { useFormLogin } from './hooks/useLoginForm.hook';
+import { Spinner } from '@/components/ui/spinner';
 
 export const LoginForm: React.FC<React.ComponentProps<'div'>> = ({
   className,
   ...props
 }) => {
-  const form = useFormLogin();
+  const { form, isPending } = useFormLogin();
 
   return (
     <AnimatedContainer>
@@ -99,7 +100,9 @@ export const LoginForm: React.FC<React.ComponentProps<'div'>> = ({
                   }}
                 />
                 <Field>
-                  <Button type="submit">Login</Button>
+                  <Button disabled={isPending} type="submit">
+                    {isPending ? <Spinner /> : 'Login'}
+                  </Button>
                   <Button variant="outline" type="button">
                     Login with Google
                   </Button>

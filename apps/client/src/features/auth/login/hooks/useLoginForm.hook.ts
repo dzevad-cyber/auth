@@ -8,7 +8,7 @@ import { useLoginUser } from '../mutations/login.mutation';
 
 export const useFormLogin = () => {
   const navigate = useNavigate();
-  const { mutate } = useLoginUser();
+  const { mutate, isPending } = useLoginUser();
 
   const form = useForm({
     defaultValues: {
@@ -36,5 +36,5 @@ export const useFormLogin = () => {
     },
   });
 
-  return form;
+  return { form, isPending };
 };
