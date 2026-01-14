@@ -20,6 +20,7 @@ import AnimatedContainer from '../../../components/animation/containers/Animatio
 import { useForm } from '@tanstack/react-form';
 import { loginSchema } from '@auth/shared';
 import { useLoginUser } from './mutations/login.mutation';
+import { toast } from 'sonner';
 
 export const LoginForm: React.FC<React.ComponentProps<'div'>> = ({
   className,
@@ -40,8 +41,9 @@ export const LoginForm: React.FC<React.ComponentProps<'div'>> = ({
       mutate(value, {
         onSuccess: () => {
           form.reset();
+          toast.success('Login successful!');
           navigate({
-            to: '/',
+            to: '/sign-up',
           });
         },
       });
