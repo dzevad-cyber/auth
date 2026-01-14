@@ -14,42 +14,13 @@ import {
   FieldLabel,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { Link, useNavigate } from '@tanstack/react-router';
-import { useCreateUser } from './mutations/signUp.mutation';
-import { useForm } from '@tanstack/react-form';
-import { signUpSchema } from '@auth/shared';
+import { Link } from '@tanstack/react-router';
 import { Spinner } from '@/components/ui/spinner';
-import { toast } from 'sonner';
-import { toasts } from '@/components/toast/toasts';
 import AnimatedContainer from '@/components/animation/containers/AnimationContainer';
+import { useSignupForm } from './hooks/useSignupForm.hook';
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
-  const { mutate, isPending } = useCreateUser();
-  const navigate = useNavigate();
-
-  const form = useForm({
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
-    },
-    validators: {
-      onSubmit: signUpSchema,
-    },
-    onSubmit: async ({ value }) => {
-      mutate(value, {
-        onSuccess: () => {
-          form.reset();
-          toast.success(toasts.success.title, toasts.success.data);
-          navigate({
-            to: '/login',
-          });
-        },
-      });
-    },
-  });
+  const { form, isPending } = useSignupForm();
 
   return (
     <AnimatedContainer>

@@ -3,7 +3,9 @@ import jwt, { type JwtPayload } from 'jsonwebtoken';
 import { AppError } from '../../../lib/errors/appError.ts';
 
 export const authenticateToken: RequestHandler = (req, _res, next) => {
-  const token = req.cookies.accessToken;
+  const authHeader = req.headers.authorization;
+  const token = authHeader?.split(' ')[1];
+
   if (!token) throw new AppError('Please login or register.', 401);
 
   const payload = jwt.verify(token, process.env.JWT_ACCESS_TOKEN);
