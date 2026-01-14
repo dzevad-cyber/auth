@@ -7,7 +7,6 @@ import { loginSchema } from '@auth/shared';
 import { useLoginUser } from '../mutations/login.mutation';
 
 export const useFormLogin = () => {
-  const navigate = useNavigate();
   const { mutate, isPending } = useLoginUser();
 
   const form = useForm({
@@ -22,15 +21,6 @@ export const useFormLogin = () => {
       mutate(value, {
         onSuccess: () => {
           form.reset();
-          toast.success(
-            ...getSuccessToast(
-              'You successfully logged in',
-              'Thanks for logging in! We hope you enjoy using our services!',
-            ),
-          );
-          navigate({
-            to: '/sign-up',
-          });
         },
       });
     },
