@@ -1,6 +1,7 @@
 import { _axios } from '@/services/axios';
 import { useMutation } from '@tanstack/react-query';
-import { apiV1FullPaths } from '@auth/shared';
+import { apiV1FullPaths, signUpSchema } from '@auth/shared';
+import * as z from 'zod';
 
 export const useCreateUser = () => {
   return useMutation({
@@ -27,10 +28,4 @@ const createUser = async (params: CreateUserParams) => {
   return res;
 };
 
-type CreateUserParams = {
-  firstName: string;
-  lastName: string;
-  password: string;
-  email: string;
-  passwordConfirm: string;
-};
+type CreateUserParams = z.infer<typeof signUpSchema>;

@@ -15,12 +15,12 @@ import {
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Link } from '@tanstack/react-router';
-import AnimatedContainer from './animation/containers/AnimationContainer';
+import AnimatedContainer from '../../../components/animation/containers/AnimationContainer';
 
-export function LoginForm({
+export const LoginForm: React.FC<React.ComponentProps<'div'>> = ({
   className,
   ...props
-}: React.ComponentProps<'div'>) {
+}) => {
   return (
     <AnimatedContainer>
       <div className={cn('flex flex-col gap-6', className)} {...props}>
@@ -76,4 +76,4 @@ export function LoginForm({
       </div>
     </AnimatedContainer>
   );
-}
+};
