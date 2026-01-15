@@ -26,7 +26,6 @@ export const globalErrorHandler = (
 
   if (!appError.isOperational) {
     return res.status(500).json({
-      status: 'error',
       message: 'Ups. Something went wrong ...',
     });
   } else {
@@ -40,21 +39,18 @@ export const globalErrorHandler = (
     const _err = appError.error;
     if (_err.type === 'APP_ERROR') {
       return res.status(statusCode).json({
-        status,
         message: appError.message,
       });
     }
 
     if (_err.type === 'VALIDATION_ERROR') {
       return res.status(statusCode).json({
-        status,
         error: _err.error ? z.flattenError(_err.error).fieldErrors : undefined,
       });
     }
 
     return res.status(500).json({
-      status: 'error',
-      message: 'Not handled error',
+      message: 'Ups. Something went wrong ...',
     });
   }
 };

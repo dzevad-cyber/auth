@@ -7,6 +7,10 @@ import TanStackQueryDevtools from '../integrations/tanstack-query/devtools';
 import type { QueryClient } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
 
+import { queryClient } from '@/integrations/tanstack-query/root-provider';
+import { getRefreshToken } from '@/features/auth/refresh/queries/getRereshToken.query';
+
+
 export interface MyRouterContext {
   queryClient: QueryClient;
 }
