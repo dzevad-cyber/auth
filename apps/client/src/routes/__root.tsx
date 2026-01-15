@@ -6,8 +6,12 @@ import TanStackQueryDevtools from '../integrations/tanstack-query/devtools';
 
 import type { QueryClient } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
+<<<<<<< Updated upstream
 import { queryClient } from '@/integrations/tanstack-query/root-provider';
 import { getRefreshToken } from '@/features/auth/refresh/queries/getRereshToken.query';
+=======
+import Header from '@/components/header/Header';
+>>>>>>> Stashed changes
 
 export interface MyRouterContext {
   queryClient: QueryClient;
