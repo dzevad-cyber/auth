@@ -6,28 +6,12 @@ import TanStackQueryDevtools from '../integrations/tanstack-query/devtools';
 
 import type { QueryClient } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
-import { queryClient } from '@/integrations/tanstack-query/root-provider';
-import { getRefreshToken } from '@/features/auth/refresh/queries/getRereshToken.query';
 
 export interface MyRouterContext {
   queryClient: QueryClient;
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
-  beforeLoad: async () => {
-    try {
-      const data = await queryClient.ensureQueryData({
-        queryKey: ['refreshToken'],
-        queryFn: getRefreshToken,
-      });
-
-      if (data.accessToken) {
-        queryClient.setQueryData(['accessToken'], data.accessToken);
-      }
-    } catch (error) {
-      console.error('Error refreshing token:', error);
-    }
-  },
   component: () => (
     <div className="grid h-screen">
       <Outlet />
