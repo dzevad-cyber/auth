@@ -20,8 +20,8 @@
       "@/emails/*": ["./src/emails/*"]
     },
     "declarationMap": true,
-    "declaration": true,
+    "declaration": true
   },
   "include": ["./src/emails/**/*.tsx", "./src/index.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
