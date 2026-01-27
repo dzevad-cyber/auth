@@ -1,5 +1,5 @@
-import app, { PORT } from './app.ts';
-import { handleServerClose } from './lib/handle.server.close.ts';
+import app, { PORT } from './app';
+import { handleServerClose } from './lib/handle.server.close';
 
 process.on('uncaughtException', (err: Error) => {
   console.error('UNCAUGHT EXCEPTION! Server shutting down...');

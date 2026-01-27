@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently --raw \"tsx --env-file=.env.dev --watch ./src/server.ts\" \"pnpm --filter @auth/shared dev\" \"pnpm --filter @auth/email dev\"",
-    "drizzle:push": "pnpm drizzle-kit push --config=./drizzle.config.ts"
+    "drizzle:push": "pnpm drizzle-kit push --config=./drizzle.config.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

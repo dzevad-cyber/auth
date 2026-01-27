@@ -1,9 +1,9 @@
 import type { RequestHandler } from 'express';
-import { db } from '../../../db/db.ts';
-import { userTable } from '../../../db/schema/userSchema.ts';
+import { db } from '../../../db/db';
+import { userTable } from '../../../db/schema/userSchema';
 import { eq } from 'drizzle-orm';
 import crypto from 'node:crypto';
-import { sendEmail } from '../../../services/nodemailer.tsx';
+import { sendEmail } from '../../../services/nodemailer';
 
 export const forgotPassword: RequestHandler = async (req, res) => {
   const [user] = await db

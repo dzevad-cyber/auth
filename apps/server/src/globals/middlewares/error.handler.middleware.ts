@@ -1,7 +1,7 @@
 import type { NextFunction, Response, Request } from 'express';
 import * as z from 'zod';
-import { logger } from '../../services/pino.logger.ts';
-import type { AppError } from '../../lib/errors/appError.ts';
+import { logger } from '../../services/pino.logger';
+import type { AppError } from '../../lib/errors/appError';
 
 export const globalErrorHandler = (
   appError: AppError,
@@ -40,17 +40,20 @@ export const globalErrorHandler = (
     if (_err.type === 'APP_ERROR') {
       return res.status(statusCode).json({
         message: appError.message,
+        status,
       });
     }
 
     if (_err.type === 'VALIDATION_ERROR') {
       return res.status(statusCode).json({
         error: _err.error ? z.flattenError(_err.error).fieldErrors : undefined,
+        status
       });
     }
 
     return res.status(500).json({
       message: 'Ups. Something went wrong ...',
+      status
     });
   }
 };

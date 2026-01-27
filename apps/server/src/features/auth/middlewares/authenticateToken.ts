@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
 import jwt, { type JwtPayload } from 'jsonwebtoken';
-import { AppError } from '../../../lib/errors/appError.ts';
+import { AppError } from '../../../lib/errors/appError';
 
 export const authenticateToken: RequestHandler = (req, _res, next) => {
   const authHeader = req.headers.authorization;

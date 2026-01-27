@@ -1,5 +1,4 @@
-import { pool } from '../db/db.ts';
-import { server } from '../server.ts';
+import { pool } from '../db/db';
 
 export const handleServerClose = async (err?: Error) => {
   console.log('err:', err);

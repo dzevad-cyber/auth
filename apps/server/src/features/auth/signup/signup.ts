@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'express';
-import { hash } from '../../../services/bcrypt.ts';
-import { db } from '../../../db/db.ts';
-import { userTable } from '../../../db/schema/userSchema.ts';
+import { hash } from '../../../services/bcrypt';
+import { db } from '../../../db/db';
+import { userTable } from '../../../db/schema/userSchema';
 
 export const signUp: RequestHandler = async (req, res, _next) => {
   const hashedPassword = await hash(req.body.password);

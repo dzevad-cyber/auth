@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
-import { forgotPasswordReqBody } from './forgetPassword.validators.ts';
-import { AppError } from '../../../lib/errors/appError.ts';
+import { forgotPasswordReqBody } from './forgetPassword.validators';
+import { AppError } from '../../../lib/errors/appError';
 import * as z from 'zod';
 
 export const validateForgotPasswordReqBody: RequestHandler = (

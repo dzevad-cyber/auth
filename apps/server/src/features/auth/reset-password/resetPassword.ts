@@ -1,9 +1,9 @@
 import type { RequestHandler } from 'express';
-import { db } from '../../../db/db.ts';
-import { userTable } from '../../../db/schema/userSchema.ts';
+import { db } from '../../../db/db';
+import { userTable } from '../../../db/schema/userSchema';
 import { and, eq, gt } from 'drizzle-orm';
-import { AppError } from '../../../lib/errors/appError.ts';
-import { hash } from '../../../services/bcrypt.ts';
+import { AppError } from '../../../lib/errors/appError';
+import { hash } from '../../../services/bcrypt';
 
 export const resetPassword: RequestHandler = async (req, res) => {
   const [user] = await db

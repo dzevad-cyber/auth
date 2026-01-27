@@ -1,8 +1,8 @@
 import type { RequestHandler } from 'express';
-import { db } from '../../../db/db.ts';
-import { userTable } from '../../../db/schema/userSchema.ts';
+import { db } from '../../../db/db';
+import { userTable } from '../../../db/schema/userSchema';
 
-export const getAllUsers: RequestHandler = async (req, res) => {
+export const getAllUsers: RequestHandler = async (_req, res) => {
   const users = await db
     .select({
       firstName: userTable.firstName,

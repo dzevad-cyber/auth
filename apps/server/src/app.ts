@@ -1,8 +1,8 @@
 import express, { type Application } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import { globalErrorHandler } from './globals/middlewares/error.handler.middleware.ts';
-import { v1Router } from './api/v1.ts';
+import { globalErrorHandler } from './globals/middlewares/error.handler.middleware';
+import { v1Router } from './api/v1';
 import cookieParser from 'cookie-parser';
 import { apiV1Paths } from '@auth/shared';
 

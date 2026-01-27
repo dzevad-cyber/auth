@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    // "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -20,7 +20,7 @@
       "@/emails/*": ["./src/emails/*"]
     },
     "declarationMap": true,
-    "declaration": true
+    "declaration": true,
   },
   "include": ["./src/emails/**/*.tsx", "./src/index.ts"],
   "exclude": ["node_modules"]

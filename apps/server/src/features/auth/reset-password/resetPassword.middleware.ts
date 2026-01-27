@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
-import { resetPasswordReqBody } from './resetPassword.validators.ts';
-import { AppError } from '../../../lib/errors/appError.ts';
+import { resetPasswordReqBody } from './resetPassword.validators';
+import { AppError } from '../../../lib/errors/appError';
 
 export const validateResetPasswordReqBody: RequestHandler = (
   req,

@@ -1,8 +1,8 @@
 import type { RequestHandler } from 'express';
 import { eq } from 'drizzle-orm';
-import { AppError } from '../../../lib/errors/appError.ts';
-import { db } from '../../../db/db.ts';
-import { userTable } from '../../../db/schema/userSchema.ts';
+import { AppError } from '../../../lib/errors/appError';
+import { db } from '../../../db/db';
+import { userTable } from '../../../db/schema/userSchema';
 
 export const logout: RequestHandler = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;

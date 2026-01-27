@@ -1,9 +1,9 @@
 import type { RequestHandler } from 'express';
 import * as z from 'zod';
-import { AppError } from '../../../lib/errors/appError.ts';
+import { AppError } from '../../../lib/errors/appError';
 import { signUpSchema } from '@auth/shared';
 
-export const validateSignUpReqBody: RequestHandler = (req, res, next) => {
+export const validateSignUpReqBody: RequestHandler = (req, _res, next) => {
   const parsedReqBody = signUpSchema.safeParse(req.body);
 
   if (!parsedReqBody.success) {

@@ -1,7 +1,7 @@
 import express, { type Router } from 'express';
-import { usersRouter } from '../features/users/routes.ts';
-import { healthRouter } from '../globals/routes/health.router.ts';
-import { authRouter } from '../features/auth/routes.ts';
+import { usersRouter } from '../features/users/routes';
+import { healthRouter } from '../globals/routes/health.router';
+import { authRouter } from '../features/auth/routes';
 import { apiV1Paths } from '@auth/shared';
 
 const { users, health, auth } = apiV1Paths;

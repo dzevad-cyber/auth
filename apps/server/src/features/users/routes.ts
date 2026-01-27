@@ -1,7 +1,7 @@
 import express, { type Router } from 'express';
-import { authenticateToken } from '../auth/middlewares/authenticateToken.ts';
-import { getAllUsers } from './controllers/getAllUsers.ts';
-import { getOneUser } from './controllers/getOneUser.ts';
+import { authenticateToken } from '../auth/middlewares/authenticateToken';
+import { getAllUsers } from './controllers/getAllUsers';
+import { getOneUser } from './controllers/getOneUser';
 
 export const usersRouter: Router = express.Router();
 
