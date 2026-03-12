@@ -9,8 +9,8 @@ services:
       - pnpm_node_modules_cache:/usr/src/node_modules
       - ./packages/shared:/usr/src/packages/shared
     command: pnpm --filter ./apps/client dev
-    env_file:
-      - ./apps/client/.env.client.dev
+    # env_file:
+    #   - ./apps/client/.env.client.dev
     ports:
       - 3000:3000
     networks:
@@ -78,8 +78,8 @@ services:
     restart: 'no'
     volumes:
       - ./apps/server:/apps/server
-    env_file:
-      - ./apps/server/.env.dev
+    # env_file:
+    #   - ./apps/server/.env.dev
     depends_on:
       postgres:
         condition: service_started
