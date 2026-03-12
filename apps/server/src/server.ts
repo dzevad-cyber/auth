@@ -9,7 +9,7 @@ process.on('uncaughtException', (err: Error) => {
   process.exit(1);
 });
 
-export const server = app.listen(PORT, () => {
+export const server = app.listen(5000, '0.0.0.0', () => {
   console.log(`Server listening on port ${PORT}`);
 });
 
