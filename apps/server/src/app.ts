@@ -7,15 +7,15 @@ import cookieParser from 'cookie-parser';
 import { apiV1Paths } from '@auth/shared';
 
 const app: Application = express();
+const corsOptions = {
+  origin: ['http://localhost:3000', 'http://192.168.0.25:8080'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+};
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: ['http://localhost:3000', 'http://192.168.0.25:8080'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
-  }),
-);
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(cookieParser());
 app.use(morgan('dev'));
 
