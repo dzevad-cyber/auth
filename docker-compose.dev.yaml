@@ -62,35 +62,35 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      migrator:
-        condition: service_completed_successfully
+      # migrator:
+      #   condition: service_completed_successfully
     logging:
       driver: local
       options:
         max-size: '5mb'
         max-file: '3'
 
-  migrator:
-    container_name: migrator
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    restart: 'no'
-    volumes:
-      - ./apps/server:/apps/server
-    # env_file:
-    #   - ./apps/server/.env.dev
-    depends_on:
-      postgres:
-        condition: service_started
-    networks:
-      - auth_net
-    command: sh -c "pnpm --filter ./apps/server drizzle:push"
-    logging:
-      driver: local
-      options:
-        max-size: '5mb'
-        max-file: '3'
+  # migrator:
+  #   container_name: migrator
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   restart: 'no'
+  #   volumes:
+  #     - ./apps/server:/apps/server
+  #   # env_file:
+  #   #   - ./apps/server/.env.dev
+  #   depends_on:
+  #     postgres:
+  #       condition: service_started
+  #   networks:
+  #     - auth_net
+  #   command: sh -c "pnpm --filter ./apps/server drizzle:push"
+  #   logging:
+  #     driver: local
+  #     options:
+  #       max-size: '5mb'
+  #       max-file: '3'
 
   postgres:
     image: postgres:18.1-alpine
